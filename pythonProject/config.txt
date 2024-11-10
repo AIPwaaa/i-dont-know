@@ -1,4 +1,0 @@
-{
-  "username": "user",
-  "vfs_path": "C:/Users/Admin/Desktop/AIP/Python/pythonProject/a.tar"
-}
