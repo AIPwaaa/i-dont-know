@@ -24,3 +24,8 @@ tar. Эмулятор должен работать в режиме GUI.
 
 4. ![Снимок экрана 2024-11-17 220302](https://github.com/user-attachments/assets/effa06d9-9fa6-48e0-8d16-a2b92fa13963)
 ![Снимок экрана 2024-11-17 220701](https://github.com/user-attachments/assets/11f40faa-0bc0-4073-b107-2eee9126fd1f)
+![Снимок экрана 2024-11-17 220921](https://github.com/user-attachments/assets/96a6309c-bdd0-4c23-bd9a-9aa16d4398c6)
+![Снимок экрана 2024-11-17 220949](https://github.com/user-attachments/assets/96515996-0d1b-4fa5-964d-438efc3dbc44)
+![Снимок экрана 2024-11-17 221012](https://github.com/user-attachments/assets/1b2b25eb-1c2c-4551-8dce-ec8c7f8c87bb)
+
+5. Все 12 тесто выполнены (по 3 на команды ls, cd и find и по 1 на cal, whoami и exit)
