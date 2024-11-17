@@ -28,12 +28,11 @@ class ShellEmulator:
 
     def list_directory(self, path):
         if path=='/':
-            self.current_dir='a'
-            return self.list_directory(self.current_dir)
+            return self.list_directory('a')
         if path=='':
             path=self.current_dir
         path = path.replace('\\', '/')
-        if self.current_dir in path:
+        if path in self.vfs and self.vfs[path].isdir():
             abs_path = path if path == '.' else (path.rstrip('/'))
         else:
             abs_path = self.current_dir + '/' + path if path == '.' else ((self.current_dir+'/'+path).rstrip('/'))
@@ -54,10 +53,7 @@ class ShellEmulator:
             return ""
         if path==self.current_dir:
             return ""
-        if self.current_dir in path or path in self.current_dir:
-            abs_path = path if path == '.' else (path.rstrip('/'))
-            if abs_path not in self.vfs or not self.vfs[abs_path].isdir():
-                return f"cd: no such file or directory: {path}"
+        if path in self.vfs and self.vfs[path].isdir():
             self.current_dir = path
         else:
             abs_path = self.current_dir + '/' + path if path == '.' else ((self.current_dir+'/'+path).rstrip('/'))
