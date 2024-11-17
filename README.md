@@ -22,4 +22,5 @@ tar. Эмулятор должен работать в режиме GUI.
 Функция whoami выводит имя пользователя
 Функция exit завершает сеанс bash
 
-4. 
+4. ![Снимок экрана 2024-11-17 220302](https://github.com/user-attachments/assets/effa06d9-9fa6-48e0-8d16-a2b92fa13963)
+![Снимок экрана 2024-11-17 220701](https://github.com/user-attachments/assets/11f40faa-0bc0-4073-b107-2eee9126fd1f)
