@@ -37,7 +37,7 @@ class ShellEmulator:
         else:
             abs_path = self.current_dir + '/' + path if path == '.' else ((self.current_dir+'/'+path).rstrip('/'))
         if abs_path not in self.vfs or not self.vfs[abs_path].isdir():
-            return f"ls: cannot access '{abs_path}': No such file or directory"
+            return f"ls: cannot access '{path}': No such file or directory"
         abs_path_with_slash = abs_path if abs_path.endswith('/') else abs_path + '/'
         content = []
         for item in self.vfs:
@@ -45,7 +45,7 @@ class ShellEmulator:
                 relative_path = item[len(abs_path_with_slash):]
                 if '/' not in relative_path.strip('/'):
                     content.append(relative_path)
-        return " ".join(content) if content else f"{abs_path}: No files or directories found"
+        return " ".join(content) if content else f"{path}: No files or directories found"
 
     def change_directory(self, path):
         if path=='a' or path=='/':
