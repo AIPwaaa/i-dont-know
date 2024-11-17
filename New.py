@@ -27,36 +27,43 @@ class ShellEmulator:
         return vfs
 
     def list_directory(self, path):
-        # Преобразуем путь в формате UNIX
-        path = path.replace('\\', '/')  # Заменяем обратные слэши на прямые
-
-        # Определяем абсолютный путь
-        abs_path = self.current_dir if path == '.' else (self.current_dir.rstrip('/'))
-
-        # Проверяем, существует ли директория
+        if path=='/':
+            self.current_dir='a'
+            return self.list_directory(self.current_dir)
+        if path=='':
+            path=self.current_dir
+        path = path.replace('\\', '/')
+        if self.current_dir in path:
+            abs_path = path if path == '.' else (path.rstrip('/'))
+        else:
+            abs_path = self.current_dir + '/' + path if path == '.' else ((self.current_dir+'/'+path).rstrip('/'))
         if abs_path not in self.vfs or not self.vfs[abs_path].isdir():
             return f"ls: cannot access '{abs_path}': No such file or directory"
-
-        # Добавляем завершающий слеш, чтобы избежать проблем с похожими именами директорий
         abs_path_with_slash = abs_path if abs_path.endswith('/') else abs_path + '/'
-
-        # Собираем файлы и папки, которые находятся непосредственно в данной директории
         content = []
         for item in self.vfs:
-            # Проверяем, находится ли элемент в текущей директории
             if item.startswith(abs_path_with_slash):
                 relative_path = item[len(abs_path_with_slash):]
-                # Проверяем, что относительный путь не содержит слеша (т.е. не вложенная директория/файл)
                 if '/' not in relative_path.strip('/'):
                     content.append(relative_path)
-
-        # Возвращаем содержимое директории (файлы и папки)
         return " ".join(content) if content else f"{abs_path}: No files or directories found"
 
     def change_directory(self, path):
-        if path not in self.vfs or not self.vfs[path].isdir():
-            return f"cd: no such file or directory: {path}"
-        self.current_dir = path
+        if path=='a' or path=='/':
+            self.current_dir='a'
+            return ""
+        if path==self.current_dir:
+            return ""
+        if self.current_dir in path or path in self.current_dir:
+            abs_path = path if path == '.' else (path.rstrip('/'))
+            if abs_path not in self.vfs or not self.vfs[abs_path].isdir():
+                return f"cd: no such file or directory: {path}"
+            self.current_dir = path
+        else:
+            abs_path = self.current_dir + '/' + path if path == '.' else ((self.current_dir+'/'+path).rstrip('/'))
+            if abs_path not in self.vfs or not self.vfs[abs_path].isdir():
+                return f"cd: no such file or directory: {path}"
+            self.current_dir=abs_path
         return ""
 
     def whoami(self):
@@ -69,14 +76,11 @@ class ShellEmulator:
 
     def find(self, pattern):
         regex_pattern = pattern.replace('*', '.*').replace('?', '.')
-
         regex = re.compile(f"^{regex_pattern}$")
-
         results = []
         for path in self.vfs:
             if regex.search(path.split('/')[-1]):
-                results.append(path.split('/')[-1])
-
+                results.append(path)
         if results:
             return "\n".join(results)
         else:
@@ -112,7 +116,10 @@ class ShellGUI:
         args = tokens[1:]
 
         if cmd == 'ls':
-            return self.emulator.list_directory(self.emulator.current_dir)
+            if args:
+                return self.emulator.list_directory(args[0])
+            else:
+                return self.emulator.list_directory(self.emulator.current_dir)
         elif cmd == 'cd':
             if args:
                 return self.emulator.change_directory(args[0])
