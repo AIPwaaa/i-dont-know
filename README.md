@@ -29,3 +29,5 @@ tar. Эмулятор должен работать в режиме GUI.
 ![Снимок экрана 2024-11-17 221012](https://github.com/user-attachments/assets/1b2b25eb-1c2c-4551-8dce-ec8c7f8c87bb)
 
 5. Все 12 тесто выполнены (по 3 на команды ls, cd и find и по 1 на cal, whoami и exit)
+
+URL-адрес репозитория https://github.com/AIPwaaa/i-dont-know
