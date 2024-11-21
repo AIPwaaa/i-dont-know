@@ -70,7 +70,9 @@ class ShellEmulator:
 
     import re
 
-    def find(self, pattern):
+    def find(self, pattern=''):
+        if pattern=='':
+            return "\n".join(self.vfs)
         regex_pattern = pattern.replace('*', '.*').replace('?', '.')
         regex = re.compile(f"^{regex_pattern}$")
         results = []
@@ -129,7 +131,7 @@ class ShellGUI:
             if args:
                 return self.emulator.find(args[0])
             else:
-                return "find: missing argument"
+                return self.emulator.find()
         elif cmd == 'exit':
             messagebox.showinfo("Shell Emulator", "Exiting...")
             root.quit()
