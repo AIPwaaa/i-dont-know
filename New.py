@@ -89,7 +89,7 @@ class ShellGUI:
     def __init__(self, root, emulator):
         self.emulator = emulator
 
-        root.title("Shell Emulator")
+        root.title("AEAEAE")
         self.command_entry = tk.Entry(root, width=80)
         self.command_entry.bind("<Return>", self.process_command)
         self.command_entry.pack(padx=10, pady=5)
