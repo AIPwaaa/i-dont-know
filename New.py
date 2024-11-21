@@ -48,6 +48,16 @@ class ShellEmulator:
         return " ".join(content) if content else f"{path}: No files or directories found"
 
     def change_directory(self, path):
+        t=0;
+        while path.startswith('..'):
+            if '/' in path and !t:
+                asd=path.split('/')
+                t=1;
+            elif !t:
+                asd=path.split('')
+                t=1;
+            
+            
         if path=='a' or path=='/':
             self.current_dir='a'
             return ""
