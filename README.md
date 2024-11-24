@@ -13,7 +13,12 @@ tar. Эмулятор должен работать в режиме GUI.
 • Путь к архиву виртуальной файловой системы.
 
 Необходимо поддержать в эмуляторе команды ls, cd и exit, а также
-следующие команды: 1. cal. 2. find. 3. whoami.
+следующие команды:
+
+1. cal.
+2. find.
+3. whoami.
+
 Все функции эмулятора должны быть покрыты тестами, а для каждой из
 поддерживаемых команд необходимо написать 3 теста.
 
@@ -30,7 +35,7 @@ tar. Эмулятор должен работать в режиме GUI.
 
 Функция exit завершает сеанс bash
 
-4.![Снимок экрана 2024-11-17 220302](https://github.com/user-attachments/assets/effa06d9-9fa6-48e0-8d16-a2b92fa13963)
+4. ![Снимок экрана 2024-11-17 220302](https://github.com/user-attachments/assets/effa06d9-9fa6-48e0-8d16-a2b92fa13963)
 
 ![Снимок экрана 2024-11-17 220701](https://github.com/user-attachments/assets/11f40faa-0bc0-4073-b107-2eee9126fd1f)
 
@@ -40,7 +45,9 @@ tar. Эмулятор должен работать в режиме GUI.
 
 ![Снимок экрана 2024-11-17 221012](https://github.com/user-attachments/assets/1b2b25eb-1c2c-4551-8dce-ec8c7f8c87bb)
 
-6. Все 12 тестов выполнены (по 3 на команды ls, cd и find и по 1 на cal, whoami и exit)
+5. Все 12 тестов выполнены (по 3 на команды ls, cd и find и по 1 на cal, whoami и exit)
+
+![Снимок экрана 2024-11-24 193959](https://github.com/user-attachments/assets/cbdc8955-e33c-48da-9aff-22e44a028dda)
 
 ![Снимок экрана 2024-11-24 193628](https://github.com/user-attachments/assets/d0b2eb0d-9ad5-489f-84ad-40bdfbcb83fd)
 
