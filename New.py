@@ -27,6 +27,8 @@ class ShellEmulator:
         return vfs
 
     def list_directory(self, path):
+        if path[0]=='/' and len(path)!=1:
+            path=path[1::]
         if path=='/':
             return self.list_directory('a')
         if path=='':
@@ -48,20 +50,37 @@ class ShellEmulator:
         return " ".join(content) if content else f"{path}: No files or directories found"
 
     def change_directory(self, path):
-        t=0;
-        while path.startswith('..'):
-            if '/' in path and !t:
-                asd=path.split('/')
-                t=1;
-            elif !t:
-                asd=path.split('')
-                t=1;
-            
-            
+        if path[0]=="/" and len(path)!=1:
+            return self.change_directory(path[1::])
+        if path=="..":
+            if self.current_dir=='a':
+                return self.change_directory('a')
+            path=''
+            abd=self.current_dir.split('/')
+            for i in range(len(abd)-1):
+                path+=abd[i]+'/'
+            self.current_dir=path.rstrip('/')
+            return ""
+        elif ".." in path:
+            vpath=path.split('/')
+            tmp=self.current_dir.split('/')
+            for p in vpath:
+                if p == "..":
+                    if len(tmp)>1:
+                        tmp.pop()
+                elif p == "." or p == "":
+                    continue
+                else:
+                    new_path='/'.join(tmp+[p]).lstrip('/')
+                    if new_path not in self.vfs or not self.vfs[new_path].isdir():
+                        return f"cd: no such file or directory: {new_path}"
+                    tmp.append(p)
+            self.current_dir = "/".join(tmp).lstrip("/")
+            return ""
         if path=='a' or path=='/':
             self.current_dir='a'
             return ""
-        if path==self.current_dir:
+        if path==self.current_dir or path=='.':
             return ""
         if path in self.vfs and self.vfs[path].isdir():
             self.current_dir = path
@@ -113,7 +132,7 @@ class ShellGUI:
     def process_command(self, event):
         command = self.command_entry.get()
         output = self.run_command(command)
-        self.output_box.insert(tk.END, f"{command}\n{output}\n{self.emulator.username}@shell:~$ ")
+        self.output_box.insert(tk.END, f"{command}\n{output}\n{self.emulator.username}@shell:~{self.emulator.current_dir} ")
         self.command_entry.delete(0, tk.END)
 
     def run_command(self, command):
@@ -143,7 +162,7 @@ class ShellGUI:
             else:
                 return self.emulator.find()
         elif cmd == 'exit':
-            messagebox.showinfo("Shell Emulator", "Exiting...")
+            messagebox.showinfo("AEAEAE", "Exiting...")
             root.quit()
         else:
             return f"{cmd}: command not found"
